@@ -12,7 +12,7 @@ data class User(
   @Json(name = "image")
   val image: String?,
   @Json(name = "token")
-  val token: String,
+  val token: String?,
   @Json(name = "username")
   val username: String
 )
