@@ -11,7 +11,7 @@ class RedirectInterceptor : Interceptor {
     var response = chain.proceed(chain.request())
     if (response.code() == 307) {
       request = request.newBuilder()
-        .url(response.header("Location"))
+        .url(response.header("Location").toString())
         .build()
       response = chain.proceed(request)
     }

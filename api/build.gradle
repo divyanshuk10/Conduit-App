@@ -6,8 +6,8 @@ plugins {
 }
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_1_7
-  targetCompatibility = JavaVersion.VERSION_1_7
+  sourceCompatibility = JavaVersion.VERSION_1_8
+  targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 dependencies {
@@ -18,8 +18,8 @@ dependencies {
   implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
   implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinstdlib_version"
-  implementation 'com.google.code.gson:gson:2.10'
-  implementation "com.squareup.okhttp3:okhttp:3.12.12"
+  implementation "com.google.code.gson:gson:$gson_version"
+  implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
 
   // test
   testImplementation 'junit:junit:4.13.2'
