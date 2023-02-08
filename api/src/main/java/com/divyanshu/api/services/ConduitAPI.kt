@@ -13,7 +13,7 @@ interface ConduitAPI {
   @POST("users")
   suspend fun signupUser(@Body signupRequest: SignupRequest): Response<UserResponse>
 
-  @POST("users")
+  @POST("users/login")
   suspend fun loginUser(@Body loginRequest: LoginRequest): Response<UserResponse>
 
   @GET("articles")

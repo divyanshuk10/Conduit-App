@@ -12,7 +12,7 @@ class ConduitClientTest {
   @Test
   fun `GET articles`() {
     runBlocking {
-      val client = ConduitClient().api.getArticles()
+      val client = ConduitClient().publicAPI.getArticles()
       Assert.assertNotNull(client.body()?.articles)
     }
   }
@@ -20,7 +20,7 @@ class ConduitClientTest {
   @Test
   fun `GET articles by author`() {
     runBlocking {
-      val client = ConduitClient().api.getArticles(author = "Anah Benešová")
+      val client = ConduitClient().publicAPI.getArticles(author = "Anah Benešová")
       Assert.assertNotNull(client.body()?.articles)
     }
   }
@@ -28,7 +28,7 @@ class ConduitClientTest {
   @Test
   fun `GET articles by tags`() {
     runBlocking {
-      val client = ConduitClient().api.getArticles(tag = "hic")
+      val client = ConduitClient().publicAPI.getArticles(tag = "hic")
       Assert.assertNotNull(client.body()?.articles)
     }
   }
@@ -43,7 +43,7 @@ class ConduitClientTest {
         username = "test_user_${Random.nextInt(99, 999)}",
       )
     runBlocking {
-      val client = ConduitClient().api.signupUser(signupRequest = SignupRequest(data))
+      val client = ConduitClient().publicAPI.signupUser(signupRequest = SignupRequest(data))
       Assert.assertNotNull(client.body()?.user?.username)
     }
   }

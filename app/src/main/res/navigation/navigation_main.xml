@@ -12,6 +12,12 @@
     tools:layout="@layout/fragment_feed" />
 
   <fragment
+    android:id="@+id/nav_my_feed"
+    android:name="com.divyanshu.newapp.ui.feed.MyFeedFragment"
+    android:label="@string/menu_feed"
+    tools:layout="@layout/fragment_feed" />
+
+  <fragment
     android:id="@+id/nav_auth"
     android:name="com.divyanshu.newapp.ui.auth.AuthFragment"
     android:label="@string/menu_auth"

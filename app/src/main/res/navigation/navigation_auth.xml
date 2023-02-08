@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:id="@+id/navigation_auth"
-  app:startDestination="@id/signupFragment">
+  app:startDestination="@id/loginFragment">
 
   <action
     android:id="@+id/gotoLoginFragment"
@@ -14,6 +14,7 @@
     app:destination="@id/signupFragment"
     app:enterAnim="@anim/nav_default_pop_enter_anim"
     app:exitAnim="@anim/nav_default_pop_exit_anim" />
+
   <fragment
     android:id="@+id/signupFragment"
     android:name="com.divyanshu.newapp.ui.auth.SignupFragment"

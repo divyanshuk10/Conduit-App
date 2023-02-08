@@ -16,9 +16,16 @@ class FeedViewModel : ViewModel() {
 
   fun fetchGlobalFeed() {
     viewModelScope.launch {
-      ArticlesRepo.fetchGlobalFeed().body()?.let {
-        _feeds.postValue(it.articles)
-        Log.d(TAG, "fetchFeed: ${it.articlesCount}")
+      ArticlesRepo.fetchGlobalFeed()?.let {
+        _feeds.postValue(it)
+      }
+    }
+  }
+
+  fun fetchMyFeed() {
+    viewModelScope.launch {
+      ArticlesRepo.fetchMyFeed()?.let {
+        _feeds.postValue(it)
       }
     }
   }
