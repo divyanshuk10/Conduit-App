@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 
 class AuthViewModel : ViewModel() {
   val api = ConduitClient.publicAPI
+  val authAPI = ConduitClient.authAPI
   private val _user = MutableLiveData<User>()
   val user: LiveData<User> = _user
 
@@ -23,6 +24,21 @@ class AuthViewModel : ViewModel() {
   fun signup(username: String, email: String, password: String) = viewModelScope.launch {
     UserRepo.signup(username, email, password)?.let {
       _user.postValue(it)
+    }
+  }
+
+  fun updateUserProfile(
+    username: String?,
+    email: String?,
+    bio: String?,
+    password: String?,
+    image: String?
+  ) {
+    viewModelScope.launch {
+      UserRepo.updateUser(bio, username, image, email, password)?.let {
+        _user.postValue(it)
+      }
+
     }
   }
 

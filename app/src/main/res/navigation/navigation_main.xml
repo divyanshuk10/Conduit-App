@@ -14,7 +14,7 @@
   <fragment
     android:id="@+id/nav_my_feed"
     android:name="com.divyanshu.newapp.ui.feed.MyFeedFragment"
-    android:label="@string/menu_feed"
+    android:label="@string/my_feed"
     tools:layout="@layout/fragment_feed" />
 
   <fragment
@@ -22,4 +22,10 @@
     android:name="com.divyanshu.newapp.ui.auth.AuthFragment"
     android:label="@string/menu_auth"
     tools:layout="@layout/fragment_auth" />
+
+  <fragment
+    android:id="@+id/nav_setting"
+    android:name="com.divyanshu.newapp.ui.settings.SettingsFragment"
+    android:label="@string/settings"
+    tools:layout="@layout/fragment_settings" />
 </navigation>
