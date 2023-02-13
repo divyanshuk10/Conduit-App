@@ -22,10 +22,6 @@ object UserRepo {
     return response.body()?.user
   }
 
-  suspend fun getUserProfile() {
-    val response = authApi.getCurrentUser().body()?.user
-  }
-
   suspend fun signup(username: String, email: String, password: String): User? {
     val response = api.signupUser(SignupRequest(SignupData(email, password, username)))
     // TODO : save it in shared prefs
@@ -49,6 +45,11 @@ object UserRepo {
     )
 
     return response.body()?.user
+  }
+
+  suspend fun getCurrentUser(token: String): User? {
+    ConduitClient.authToken = token
+    return authApi.getCurrentUser().body()?.user
   }
 
 }

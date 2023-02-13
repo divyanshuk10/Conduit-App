@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.divyanshu.newapp.R
 import com.divyanshu.newapp.databinding.FragmentFeedBinding
 
 class MyFeedFragment : Fragment() {
@@ -22,7 +24,7 @@ class MyFeedFragment : Fragment() {
     savedInstanceState: Bundle?
   ): View? {
     _binding = FragmentFeedBinding.inflate(inflater, container, false)
-    feedAdapter = ArticleFeedAdapter()
+    feedAdapter = ArticleFeedAdapter { articleId -> openArticle(articleId) }
     _binding?.feedRecyclerView?.layoutManager = LinearLayoutManager(context)
     _binding?.feedRecyclerView?.adapter = feedAdapter
     viewModel = ViewModelProvider(this)[FeedViewModel::class.java]
@@ -38,6 +40,13 @@ class MyFeedFragment : Fragment() {
       feedAdapter.submitList(it)
     }
   }
+
+  fun openArticle(articleId: String) {
+    findNavController().navigate(R.id.action_myfeed_openArticle, Bundle().apply {
+      putString(resources.getString(R.string.arg_article_id), articleId)
+    })
+  }
+
 
   override fun onDestroyView() {
     super.onDestroyView()

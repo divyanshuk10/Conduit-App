@@ -1,8 +1,11 @@
 package com.divyanshu.newapp
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -17,14 +20,22 @@ import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
 
+  companion object {
+    const val PREFS_AUTH = " prefs_auth"
+    const val PREFS__KEY_TOKEN = " prefs_key_token"
+  }
+
   private lateinit var authViewModel: AuthViewModel
   private lateinit var appBarConfiguration: AppBarConfiguration
   private lateinit var binding: ActivityMainBinding
+  private lateinit var sharedPreferences: SharedPreferences
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    sharedPreferences = getSharedPreferences(PREFS_AUTH, MODE_PRIVATE)
     authViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
     binding = ActivityMainBinding.inflate(layoutInflater)
+
     setContentView(binding.root)
 
     setSupportActionBar(binding.appBarLaunch.toolbar)
@@ -44,8 +55,22 @@ class MainActivity : AppCompatActivity() {
     setupActionBarWithNavController(navController, appBarConfiguration)
     navView.setupWithNavController(navController)
 
+    sharedPreferences.getString(PREFS__KEY_TOKEN, null)?.let {
+      authViewModel.getCurrentUser(it)
+    }
+
     authViewModel.user.observe({ lifecycle }) {
       updateMenu(it)
+      it?.token?.let {
+        sharedPreferences.edit {
+          putString(PREFS__KEY_TOKEN, it)
+        }
+      }
+        ?: run {
+          sharedPreferences.edit {
+            remove(PREFS_AUTH)
+          }
+        }
       navController.navigateUp()
     }
   }
@@ -56,8 +81,21 @@ class MainActivity : AppCompatActivity() {
         binding.navView.menu.clear()
         binding.navView.inflateMenu(R.menu.menu_main_user_drawer)
       }
-      else -> {}
+      else -> {
+        binding.navView.menu.clear()
+        binding.navView.inflateMenu(R.menu.menu_main_guest_drawer)
+      }
     }
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    when (item.itemId) {
+      R.id.action_logout -> {
+        authViewModel.logout()
+        return true
+      }
+    }
+    return super.onOptionsItemSelected(item)
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {

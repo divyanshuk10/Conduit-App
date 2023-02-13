@@ -9,7 +9,7 @@ import retrofit2.http.*
 
 interface ConduitAuthAPI {
 
-  @GET
+  @GET("user")
   suspend fun getCurrentUser(): Response<UserResponse>
 
   @PUT("user")

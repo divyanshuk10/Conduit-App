@@ -9,13 +9,30 @@
     android:id="@+id/nav_feed"
     android:name="com.divyanshu.newapp.ui.feed.GlobalFeedFragment"
     android:label="@string/menu_feed"
-    tools:layout="@layout/fragment_feed" />
+    tools:layout="@layout/fragment_feed">
+
+    <action
+      android:id="@+id/action_feed_openArticle"
+      app:destination="@id/nav_article"
+      app:popUpTo="@id/nav_feed" />
+    <argument
+      android:name="@string/arg_article_id"
+      app:argType="string" />
+  </fragment>
 
   <fragment
     android:id="@+id/nav_my_feed"
     android:name="com.divyanshu.newapp.ui.feed.MyFeedFragment"
     android:label="@string/my_feed"
-    tools:layout="@layout/fragment_feed" />
+    tools:layout="@layout/fragment_feed">
+    <action
+      android:id="@+id/action_myfeed_openArticle"
+      app:destination="@id/nav_article"
+      app:popUpTo="@id/nav_my_feed" />
+    <argument
+      android:name="@string/arg_article_id"
+      app:argType="string" />
+  </fragment>
 
   <fragment
     android:id="@+id/nav_auth"
@@ -28,4 +45,11 @@
     android:name="com.divyanshu.newapp.ui.settings.SettingsFragment"
     android:label="@string/settings"
     tools:layout="@layout/fragment_settings" />
+
+  <fragment
+    android:id="@+id/nav_article"
+    android:name="com.divyanshu.newapp.ui.article.ArticleFragment"
+    tools:layout="@layout/fragment_article" />
+
+
 </navigation>

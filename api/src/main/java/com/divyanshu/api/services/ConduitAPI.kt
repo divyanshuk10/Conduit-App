@@ -2,6 +2,7 @@ package com.divyanshu.api.services
 
 import com.divyanshu.api.models.requests.LoginRequest
 import com.divyanshu.api.models.requests.SignupRequest
+import com.divyanshu.api.models.response.ArticleResponse
 import com.divyanshu.api.models.response.ArticlesResponse
 import com.divyanshu.api.models.response.TagsResponse
 import com.divyanshu.api.models.response.UserResponse
@@ -26,7 +27,7 @@ interface ConduitAPI {
   @GET("articles/{slug}")
   suspend fun getArticleBySlug(
     @Path("slug") slug: String
-  ): Response<ArticlesResponse>
+  ): Response<ArticleResponse>
 
   @GET("tags")
   suspend fun getTags(): Response<TagsResponse>
